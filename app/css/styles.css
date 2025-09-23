@@ -589,6 +589,98 @@ footer {
     align-items: center;
 }
 
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow-medium);
+    border-top: 4px solid var(--primary-color);
+    animation: slideIn 0.3s ease-out;
+}
+
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.modal-content h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-dark);
+    font-size: 1.5rem;
+}
+
+.modal-content p {
+    margin: 0 0 1.5rem 0;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close:hover {
+    color: var(--text-dark);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive modal */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 20% auto;
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .modal-icon {
+        font-size: 2.5rem;
+    }
+    
+    .modal-content h3 {
+        font-size: 1.3rem;
+    }
+}
+
 /* Animaciones */
 @keyframes fadeInUp {
     from {
@@ -630,116 +722,5 @@ footer {
     
     .features-section {
         padding: 2rem 1rem;
-    }
-}
-
-/* Estilos para ventanas emergentes (modales) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    animation: fadeIn 0.3s ease-out;
-}
-
-.modal.show {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    position: relative;
-    transform: scale(0.7);
-    animation: modalSlideIn 0.3s ease-out forwards;
-}
-
-.modal-content h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.modal-content p {
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.5;
-}
-
-.modal-close {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
-
-.modal-close:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-}
-
-.success-icon {
-    font-size: 2rem;
-    color: var(--success-color);
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.error-icon {
-    font-size: 2rem;
-    color: var(--danger-color);
-    margin-bottom: 1rem;
-    display: block;
-}
-
-/* Animaciones adicionales para modales */
-@keyframes modalSlideIn {
-    from {
-        transform: scale(0.7) translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Responsive para modales */
-@media (max-width: 768px) {
-    .modal-content {
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-    
-    .modal-content h3 {
-        font-size: 1.3rem;
-    }
-    
-    .modal-content p {
-        font-size: 1rem;
     }
 }

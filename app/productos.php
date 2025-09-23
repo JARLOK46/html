@@ -139,7 +139,6 @@ $todos_productos = $stmt->fetchAll();
             <div class="header-content">
                 <div class="logo">
                     <h1>🌱 Mercado Campesino</h1>
-                    <p>Vereda Pueblo Rico</p>
                 </div>
                 <nav>
                     <ul>
@@ -154,9 +153,7 @@ $todos_productos = $stmt->fetchAll();
 
     <main class="container">
         <?php if ($mensaje): ?>
-            <div class="mensaje <?php echo $tipo_mensaje; ?>">
-                <?php echo htmlspecialchars($mensaje); ?>
-            </div>
+            <div class="mensaje <?php echo $tipo_mensaje; ?>"><?php echo htmlspecialchars($mensaje); ?></div>
         <?php endif; ?>
 
         <?php if (empty($campesinos)): ?>
@@ -292,62 +289,62 @@ $todos_productos = $stmt->fetchAll();
         </div>
     </footer>
 
-    <!-- Modal de confirmación -->
-    <div id="modalConfirmacion" class="modal">
+    <!-- Modal para notificaciones -->
+    <div id="modal" class="modal" style="display: none;">
         <div class="modal-content">
-            <span id="modalIcon" class="success-icon">✅</span>
-            <h3 id="modalTitulo">¡Éxito!</h3>
-            <p id="modalMensaje">Operación realizada correctamente</p>
-            <button class="modal-close" onclick="cerrarModal()">Aceptar</button>
+            <span class="close">&times;</span>
+            <div class="modal-icon">
+                <span id="modal-icon">✅</span>
+            </div>
+            <h3 id="modal-title">¡Éxito!</h3>
+            <p id="modal-message">Operación completada exitosamente</p>
+            <button id="modal-btn" class="btn">Aceptar</button>
         </div>
     </div>
 
     <script>
+        // Función para mostrar modal
         function mostrarModal(tipo, titulo, mensaje) {
-            const modal = document.getElementById('modalConfirmacion');
-            const icono = document.getElementById('modalIcon');
-            const tituloElement = document.getElementById('modalTitulo');
-            const mensajeElement = document.getElementById('modalMensaje');
+            const modal = document.getElementById('modal');
+            const modalIcon = document.getElementById('modal-icon');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+            const modalContent = document.querySelector('.modal-content');
             
-            // Configurar contenido del modal
-            tituloElement.textContent = titulo;
-            mensajeElement.textContent = mensaje;
-            
-            // Configurar icono según el tipo
             if (tipo === 'success') {
-                icono.textContent = '✅';
-                icono.className = 'success-icon';
-            } else if (tipo === 'error') {
-                icono.textContent = '❌';
-                icono.className = 'error-icon';
+                modalIcon.textContent = '✅';
+                modalContent.style.borderTop = '4px solid var(--success-color, #28a745)';
+            } else {
+                modalIcon.textContent = '❌';
+                modalContent.style.borderTop = '4px solid var(--error-color, #dc3545)';
             }
             
-            // Mostrar modal
-            modal.classList.add('show');
+            modalTitle.textContent = titulo;
+            modalMessage.textContent = mensaje;
+            modal.style.display = 'block';
         }
         
-        function cerrarModal() {
-            const modal = document.getElementById('modalConfirmacion');
-            modal.classList.remove('show');
+        // Cerrar modal
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('modal').style.display = 'none';
         }
         
-        // Cerrar modal al hacer clic fuera de él
+        document.getElementById('modal-btn').onclick = function() {
+            document.getElementById('modal').style.display = 'none';
+        }
+        
         window.onclick = function(event) {
-            const modal = document.getElementById('modalConfirmacion');
-            if (event.target === modal) {
-                cerrarModal();
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
             }
         }
         
-        // Mostrar modal si hay mensaje PHP
-        <?php if (!empty($mensaje)): ?>
-            window.onload = function() {
-                <?php if ($tipo_mensaje === 'exito'): ?>
-                    mostrarModal('success', '¡Éxito!', '<?php echo addslashes($mensaje); ?>');
-                <?php else: ?>
-                    mostrarModal('error', 'Error', '<?php echo addslashes($mensaje); ?>');
-                <?php endif; ?>
-            }
+        // Mostrar modal si hay mensaje de éxito o error
+        <?php if (!empty($mensaje) && $tipo_mensaje === 'exito'): ?>
+            mostrarModal('success', '¡Producto Registrado!', '<?php echo addslashes($mensaje); ?>');
+        <?php elseif (!empty($mensaje) && $tipo_mensaje === 'error'): ?>
+            mostrarModal('error', 'Error', '<?php echo addslashes($mensaje); ?>');
         <?php endif; ?>
     </script>
 </body>

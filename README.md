@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-Este es un sistema web completo para la gestión del **Mercado Campesino de la Vereda Pueblo Rico**. Permite llevar un control e inventario de los productos que se ofrecen los fines de semana, gestionando tanto la información de los campesinos como sus productos.
+Este es un sistema web completo para la gestión del **Mercado Campesino de la **. Permite llevar un control e inventario de los productos que se ofrecen los fines de semana, gestionando tanto la información de los campesinos como sus productos.
 
 ## Características Principales
 

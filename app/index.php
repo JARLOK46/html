@@ -25,7 +25,6 @@ try {
     <header>
         <div class="container">
             <h1>🌱 Mercado Campesino</h1>
-            <p>Vereda Pueblo Rico</p>
         </div>
     </header>
 
