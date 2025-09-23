@@ -291,5 +291,64 @@ $todos_productos = $stmt->fetchAll();
             <p>&copy; 2024 Mercado Campesino - Vereda Pueblo Rico</p>
         </div>
     </footer>
+
+    <!-- Modal de confirmación -->
+    <div id="modalConfirmacion" class="modal">
+        <div class="modal-content">
+            <span id="modalIcon" class="success-icon">✅</span>
+            <h3 id="modalTitulo">¡Éxito!</h3>
+            <p id="modalMensaje">Operación realizada correctamente</p>
+            <button class="modal-close" onclick="cerrarModal()">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        function mostrarModal(tipo, titulo, mensaje) {
+            const modal = document.getElementById('modalConfirmacion');
+            const icono = document.getElementById('modalIcon');
+            const tituloElement = document.getElementById('modalTitulo');
+            const mensajeElement = document.getElementById('modalMensaje');
+            
+            // Configurar contenido del modal
+            tituloElement.textContent = titulo;
+            mensajeElement.textContent = mensaje;
+            
+            // Configurar icono según el tipo
+            if (tipo === 'success') {
+                icono.textContent = '✅';
+                icono.className = 'success-icon';
+            } else if (tipo === 'error') {
+                icono.textContent = '❌';
+                icono.className = 'error-icon';
+            }
+            
+            // Mostrar modal
+            modal.classList.add('show');
+        }
+        
+        function cerrarModal() {
+            const modal = document.getElementById('modalConfirmacion');
+            modal.classList.remove('show');
+        }
+        
+        // Cerrar modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalConfirmacion');
+            if (event.target === modal) {
+                cerrarModal();
+            }
+        }
+        
+        // Mostrar modal si hay mensaje PHP
+        <?php if (!empty($mensaje)): ?>
+            window.onload = function() {
+                <?php if ($tipo_mensaje === 'exito'): ?>
+                    mostrarModal('success', '¡Éxito!', '<?php echo addslashes($mensaje); ?>');
+                <?php else: ?>
+                    mostrarModal('error', 'Error', '<?php echo addslashes($mensaje); ?>');
+                <?php endif; ?>
+            }
+        <?php endif; ?>
+    </script>
 </body>
 </html>
