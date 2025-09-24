@@ -26,7 +26,31 @@ try {
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-circle"></div>
+                    <?php
+                    // Buscar imagen de logo en la carpeta uploads/logo/
+                    $logo_path = 'uploads/logo/';
+                    $logo_image = null;
+                    
+                    if (is_dir($logo_path)) {
+                        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                        $files = scandir($logo_path);
+                        
+                        foreach ($files as $file) {
+                            if ($file != '.' && $file != '..') {
+                                $file_extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                                if (in_array($file_extension, $allowed_extensions)) {
+                                    $logo_image = $logo_path . $file;
+                                    break; // Usar la primera imagen encontrada
+                                }
+                            }
+                        }
+                    }
+                    
+                    if ($logo_image && file_exists($logo_image)): ?>
+                        <img src="<?php echo htmlspecialchars($logo_image); ?>" alt="Logo Mercado Campesino" class="logo-image">
+                    <?php else: ?>
+                        <div class="logo-circle"></div>
+                    <?php endif; ?>
                     <h1>Mercado Campesino</h1>
                 </div>
                 <nav class="main-nav">
@@ -121,6 +145,47 @@ try {
                         <h3>🌍 Impacto Social</h3>
                         <p>Contribuimos al desarrollo sostenible de la Vereda Pueblo Rico, mejorando la calidad de vida de las familias campesinas y garantizando productos frescos y saludables para toda la comunidad.</p>
                     </div>
+                </div>
+            </section>
+
+            <!-- Galería de Imágenes -->
+            <section class="gallery-section">
+                <h2>📸 Galería del Mercado Campesino</h2>
+                <div class="gallery-grid">
+                    <?php
+                    $images_dir = 'uploads/images/';
+                    $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    
+                    if (is_dir($images_dir)) {
+                        $images = array_diff(scandir($images_dir), array('.', '..'));
+                        $image_count = 0;
+                        
+                        foreach ($images as $image) {
+                            $file_extension = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+                            if (in_array($file_extension, $allowed_extensions)) {
+                                $image_count++;
+                                echo '<div class="gallery-item">';
+                                echo '<img src="' . $images_dir . htmlspecialchars($image) . '" alt="Imagen del mercado campesino" loading="lazy">';
+                                echo '<div class="gallery-overlay">';
+                                echo '<span class="gallery-title">' . htmlspecialchars(pathinfo($image, PATHINFO_FILENAME)) . '</span>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                        }
+                        
+                        if ($image_count === 0) {
+                            echo '<div class="no-images">';
+                            echo '<p>🖼️ No hay imágenes disponibles en este momento.</p>';
+                            echo '<p class="upload-info">Las imágenes se pueden subir a la carpeta: <code>uploads/images/</code></p>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<div class="no-images">';
+                        echo '<p>📁 La carpeta de imágenes no existe.</p>';
+                        echo '<p class="upload-info">Crear la carpeta: <code>uploads/images/</code></p>';
+                        echo '</div>';
+                    }
+                    ?>
                 </div>
             </section>
 

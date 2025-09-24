@@ -100,7 +100,31 @@ try {
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-circle"></div>
+                    <?php
+                    // Buscar imagen de logo en la carpeta uploads/logo/
+                    $logo_path = 'uploads/logo/';
+                    $logo_image = null;
+                    
+                    if (is_dir($logo_path)) {
+                        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                        $files = scandir($logo_path);
+                        
+                        foreach ($files as $file) {
+                            if ($file != '.' && $file != '..') {
+                                $file_extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                                if (in_array($file_extension, $allowed_extensions)) {
+                                    $logo_image = $logo_path . $file;
+                                    break; // Usar la primera imagen encontrada
+                                }
+                            }
+                        }
+                    }
+                    
+                    if ($logo_image && file_exists($logo_image)): ?>
+                        <img src="<?php echo htmlspecialchars($logo_image); ?>" alt="Logo Mercado Campesino" class="logo-image">
+                    <?php else: ?>
+                        <div class="logo-circle"></div>
+                    <?php endif; ?>
                     <h1>Mercado Campesino</h1>
                 </div>
                 <nav class="main-nav">

@@ -154,6 +154,21 @@ header::before {
     z-index: 1;
 }
 
+.logo-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
 .logo:hover .logo-circle {
     transform: scale(1.05);
     box-shadow: var(--shadow-lg);
@@ -866,6 +881,143 @@ footer::before {
 .info-card li:hover::before {
     transform: scale(1.2);
     color: var(--primary-light);
+}
+
+/* Sección de galería */
+.gallery-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--surface) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 30% 70%, rgba(22, 163, 74, 0.03) 0%, transparent 50%),
+                      radial-gradient(circle at 70% 30%, rgba(34, 197, 94, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.gallery-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 2px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+    margin-top: 3rem;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-slow);
+    background: var(--surface);
+    aspect-ratio: 4/3;
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.gallery-item:nth-child(1) { animation-delay: 0.1s; }
+.gallery-item:nth-child(2) { animation-delay: 0.2s; }
+.gallery-item:nth-child(3) { animation-delay: 0.3s; }
+.gallery-item:nth-child(4) { animation-delay: 0.4s; }
+.gallery-item:nth-child(5) { animation-delay: 0.5s; }
+.gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+.gallery-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 1.5rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: var(--transition);
+}
+
+.gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+}
+
+.gallery-title {
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.no-images {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 2px dashed var(--border-light);
+    color: var(--text-secondary);
+}
+
+.no-images p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.upload-info {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.upload-info code {
+    background: var(--secondary);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius);
+    font-family: 'Courier New', monospace;
+    color: var(--primary);
+    font-weight: 600;
 }
 
 /* Sección de Características moderna */
