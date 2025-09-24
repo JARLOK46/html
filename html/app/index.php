@@ -24,19 +24,21 @@ try {
 <body>
     <header>
         <div class="container">
-            <h1>🌱 Mercado Campesino</h1>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-circle"></div>
+                    <h1>Mercado Campesino</h1>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.php" class="active">Inicio</a></li>
+                        <li><a href="campesinos.php">Campesinos</a></li>
+                        <li><a href="productos.php">Productos</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
-
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="index.php" class="active">Inicio</a></li>
-                <li><a href="campesinos.php">Campesinos</a></li>
-                <li><a href="productos.php">Productos</a></li>
-            </ul>
-        </div>
-    </nav>
 
     <main>
         <div class="container">

@@ -138,9 +138,10 @@ $todos_productos = $stmt->fetchAll();
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <h1>🌱 Mercado Campesino</h1>
+                    <div class="logo-circle"></div>
+                    <h1>Mercado Campesino</h1>
                 </div>
-                <nav>
+                <nav class="main-nav">
                     <ul>
                         <li><a href="index.php">Inicio</a></li>
                         <li><a href="campesinos.php">Campesinos</a></li>
