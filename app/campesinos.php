@@ -238,7 +238,71 @@ try {
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Mercado Campesino - Vereda Pueblo Rico</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <?php
+                        // Buscar imagen de logo en la carpeta uploads/logo/
+                        $logo_path = 'uploads/logo/';
+                        $logo_image = null;
+                        
+                        if (is_dir($logo_path)) {
+                            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+                            $files = scandir($logo_path);
+                            
+                            foreach ($files as $file) {
+                                if ($file != '.' && $file != '..') {
+                                    $file_extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                                    if (in_array($file_extension, $allowed_extensions)) {
+                                        $logo_image = $logo_path . $file;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if ($logo_image && file_exists($logo_image)): ?>
+                            <img src="<?php echo htmlspecialchars($logo_image); ?>" alt="Logo Mercado Campesino" class="footer-logo-img">
+                        <?php else: ?>
+                            <div class="footer-logo-circle"></div>
+                        <?php endif; ?>
+                        <h3>Mercado Campesino</h3>
+                    </div>
+                    <p class="footer-description">Conectando la tradición agrícola con la tecnología moderna en la Vereda Pueblo Rico.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.php">🏠 Inicio</a></li>
+                        <li><a href="campesinos.php">👨‍🌾 Campesinos</a></li>
+                        <li><a href="productos.php">🌱 Productos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="footer-contact">
+                        <p>📍 Vereda Pueblo Rico</p>
+                        <p>📧 info@mercadocampesino.com</p>
+                        <p>📱 +57 300 123 4567</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">📘 Facebook</a>
+                        <a href="#" class="social-link">📷 Instagram</a>
+                        <a href="#" class="social-link">🐦 Twitter</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mercado Campesino - Vereda Pueblo Rico. Todos los derechos reservados.</p>
+                <p class="footer-tech">Desarrollado con ❤️ para nuestra comunidad rural</p>
+            </div>
         </div>
     </footer>
 
